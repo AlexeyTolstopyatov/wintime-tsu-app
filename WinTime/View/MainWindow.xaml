@@ -11,7 +11,7 @@
         Title="WinTime" 
         Height="700" Width="900">
     <Window.DataContext>
-        <local:MainWindowModel/>
+        <local:MainWindow/>
     </Window.DataContext>
     <Grid>
         <frmk:NavigationView
@@ -23,12 +23,12 @@
             IsBackButtonVisible="Collapsed"
             OpenPaneLength="200">
             
-            <frmk:NavigationView.ItemTemplate>
-                <ControlTemplate>
-                    <frmk:NavigationView
-                        Header="{Binding}"/>
-                </ControlTemplate>
-            </frmk:NavigationView.ItemTemplate>
+            <!-- <frmk:NavigationView.ItemTemplate> -->
+            <!--     <ControlTemplate> -->
+            <!--         <frmk:NavigationView -->
+            <!--             Header="{Binding}"/> -->
+            <!--     </ControlTemplate> -->
+            <!-- </frmk:NavigationView.ItemTemplate> -->
             
             <frmk:NavigationView.MenuItems>
                 <frmk:NavigationViewItem

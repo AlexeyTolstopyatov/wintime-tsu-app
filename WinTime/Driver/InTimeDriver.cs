@@ -1,4 +1,15 @@
-﻿using MicaWPF.Core.Interop;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Runtime.Serialization;
+using System.Text.Json;
+using System.Threading.Tasks;
+using System.Windows;
+using MicaWPF.Core.Interop;
+using WinTime.Model;
 
 namespace WinTime.Driver;
 
@@ -9,17 +20,42 @@ namespace WinTime.Driver;
 /// </summary>
 public class InTimeDriver
 {
-    private InTimeDriver? DriverInstance { get; set; }
-
+    private static InTimeDriver? DriverInstance { get; set; }
+    
     /// <summary>
     /// Singleton pattern usage, just because
     /// Only one instance of TSU API driver needed
     /// </summary>
-    /// <returns></returns>
-    public InTimeDriver Call()
+    /// <returns>
+    /// A Main instance of driver
+    /// </returns>
+    public static InTimeDriver Call()
     {
         return DriverInstance ??= new InTimeDriver();
     }
-    
-    
+
+    public InTimeDriver Deserialize<T>(ref T collection, string path)
+    {
+        HttpClient client = new();
+        try
+        {
+            var request = 
+                client.GetAsync("https://intime.tsu.ru/api/old-web/v1/" + path);
+            
+            request.Result.EnsureSuccessStatusCode();
+
+            var response = 
+                request.Result.Content.ReadFromJsonAsync<T>();
+            
+            if (response.Result is not null)
+                collection = response.Result;
+            
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message);
+        }
+
+        return this;
+    }
 }

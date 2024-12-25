@@ -3,10 +3,27 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vm="clr-namespace:WinTime.ViewModel"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:WinTime.View"
       mc:Ignorable="d"
       Title="MainPage" Height="450" Width="800">
+    <Page.DataContext>
+        <vm:MainPage/>
+    </Page.DataContext>
     <Grid>
-        
+        <StackPanel
+            Orientation="Vertical">
+            <ComboBox
+                Margin="200, 20, 200,0 "
+                DisplayMemberPath="Name"
+                ItemsSource="{Binding Buildings}">
+            </ComboBox>
+            <ComboBox
+                Margin="200, 20, 200, 0"
+                DisplayMemberPath="Name"
+                ItemsSource="{Binding Faculties}">
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Page>
