@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.DirectoryServices.ActiveDirectory;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Baml2006;
 using MicaWPF.Core.Interop;
 using WinTime.Model;
 
@@ -53,7 +55,9 @@ public class InTimeDriver
         }
         catch (Exception e)
         {
-            MessageBox.Show(e.Message);
+            NotificationDriver
+                .Call()
+                .Notify("WinTime errors occured", e.Message);
         }
 
         return this;

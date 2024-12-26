@@ -12,6 +12,14 @@ public class MainPage : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     private readonly BuildingsCollection _buildings;
     private readonly FacultiesCollection _faculties;
+    private readonly GroupsCollection _groups;
+
+    public GroupsCollection Groups
+    {
+        get => _groups;
+        init => SetField(ref _groups, value, nameof(Groups));
+    }
+    
     public BuildingsCollection Buildings
     {
         get => _buildings;
@@ -31,10 +39,10 @@ public class MainPage : INotifyPropertyChanged
         InTimeDriver
             .Call()
             .Deserialize(ref buildings, "buildings")
-            .Deserialize(ref faculties, "faculties");
+            .Deserialize(ref faculties, "faculties"); 
 
-        Buildings = buildings;
-        Faculties = faculties;
+        SetField(ref _buildings!, buildings, nameof(Buildings));
+        SetField(ref _faculties!, faculties, nameof(Faculties));
     }
     
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

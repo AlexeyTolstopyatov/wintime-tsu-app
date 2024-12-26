@@ -5,10 +5,12 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <UseWindowsForms>true</UseWindowsForms> <!-- Get NotifyIcon -->
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="MicaWPF" Version="6.2.10" />
+      <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
       <PackageReference Include="WPF-UI" Version="4.0.0-rc.3" />
     </ItemGroup>
 
