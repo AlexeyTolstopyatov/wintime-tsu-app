@@ -16,6 +16,12 @@ public class NotificationDriver
         return DriverInstance ??= new NotificationDriver();
     }
 
+    /// <summary>
+    /// Creates Windowed Message or Toast with given strings
+    /// </summary>
+    /// <param name="header">Title</param>
+    /// <param name="content">Message</param>
+    /// <returns></returns>
     public NotificationDriver Notify(string header, string content)
     {
         new MessageBox

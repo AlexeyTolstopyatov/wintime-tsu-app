@@ -2,7 +2,7 @@
 
 namespace WinTime.Model;
 
-public class BuildingsCollection : ObservableCollection<InTimeObject>
+public sealed class BuildingsCollection : ObservableCollection<InTimeObject>
 {
     
 }

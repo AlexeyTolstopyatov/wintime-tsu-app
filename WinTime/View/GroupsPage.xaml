@@ -3,11 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:WinTime.View"
       mc:Ignorable="d"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:vm="clr-namespace:WinTime.ViewModel"
-      Title="GroupsPage" Height="600" Width="900">
+      Title="GroupsPage" Height="Auto" Width="Auto">
     <Page.DataContext>
         <vm:MainPage/>
     </Page.DataContext>
@@ -19,21 +18,26 @@
         <ui:Card
             Grid.Column="0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Stretch"
-            Margin="10">
+            VerticalAlignment="Top"
+            Margin="10"
+            MinWidth="300"
+            MaxWidth="300">
             <ui:Card.Content>
-                <StackPanel
-                    Orientation="Vertical"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
-                    <Label Content="Группы"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Content="{Binding SelectedFaculty}"/>
                     <ListBox
-                        ItemsSource="{Binding Groups}">
-                        
+                        Grid.Row="1"
+                        ItemsSource="{Binding Groups}"
+                        DisplayMemberPath="Name">
                     </ListBox>
-                </StackPanel>
+                </Grid>
             </ui:Card.Content>
-            
         </ui:Card>
     </Grid>
 </Page>

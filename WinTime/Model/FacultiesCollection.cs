@@ -3,7 +3,7 @@ using WinTime.Driver;
 
 namespace WinTime.Model;
 
-public class FacultiesCollection : ObservableCollection<InTimeObject>
+public sealed class FacultiesCollection : ObservableCollection<InTimeObject>
 {
     
 }

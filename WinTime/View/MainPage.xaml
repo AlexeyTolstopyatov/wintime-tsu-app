@@ -7,46 +7,50 @@
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:WinTime.View"
       mc:Ignorable="d"
-      Title="MainPage" Height="600" Width="800">
+      Title="MainPage" Height="Auto" Width="Auto">
     <Page.DataContext>
-        <vm:MainPage/>
+        <vm:MainPage/> 
     </Page.DataContext>
     <Grid>
         <StackPanel
             Orientation="Horizontal"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top">
-            
-            <!-- Buildings -->
-            <StackPanel
-                Orientation="Vertical"
-                MinWidth="200">
-                <Label
-                    Content="Корпуса ТГУ"/>
-                <ListBox
-                    MaxHeight="400"
-                    MaxWidth="200"
-                    DisplayMemberPath="Name"
-                    Padding="10"
-                    ItemsSource="{Binding Buildings}"/>
-            </StackPanel>
+            VerticalAlignment="Top"
+            Margin="10">
+            <ui:Card>
+                <ui:Card.Content>
+                    <!-- Buildings -->
+                        <StackPanel
+                            Orientation="Vertical"
+                            MinWidth="200">
+                            <Label
+                                Content="Корпуса ТГУ"/>
+                            <ListBox
+                                MaxHeight="400"
+                                MaxWidth="200"
+                                DisplayMemberPath="Name"
+                                Padding="10"
+                                ItemsSource="{Binding Buildings}"/>
+                        </StackPanel>
+                </ui:Card.Content>
+            </ui:Card>
             <!-- Faculties -->
-            <StackPanel
-                Orientation="Vertical"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left">
-                    <Label
-                        Content="Факультеты ТГУ"/>
-                    <ListBox
-                        x:Name="FacultiesList"
-                        DisplayMemberPath="Name"
-                        MaxWidth="500"
-                        MaxHeight="400"
-                        Padding="10"
-                        MouseDoubleClick="FacultiesList_OnMouseDoubleClick"
-                        ItemsSource="{Binding Faculties}"/>
-                    
-            </StackPanel>
+            <ui:Card>
+                <ui:Card.Content>
+                    <StackPanel>
+                        <Label
+                            Content="Факультеты ТГУ"/>
+                        <ListBox
+                            x:Name="FacultiesList"
+                            DisplayMemberPath="Name"
+                            MaxWidth="500"
+                            MaxHeight="400"
+                            Padding="10"
+                            MouseDoubleClick="FacultiesList_OnMouseDoubleClick"
+                            ItemsSource="{Binding Faculties}"/>
+                    </StackPanel>
+                </ui:Card.Content>    
+            </ui:Card>
         </StackPanel>
     </Grid>
 </Page>

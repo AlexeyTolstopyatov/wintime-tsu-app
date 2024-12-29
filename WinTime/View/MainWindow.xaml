@@ -16,19 +16,12 @@
     <Grid>
         <frmk:NavigationView
             PaneTitle="Вкладки расписания"
-            IsPaneOpen="True"
+            IsPaneOpen="False"
             IsPaneVisible="True"
             PaneDisplayMode="Left"
             CompactPaneLength="100"
             IsBackButtonVisible="Collapsed"
             OpenPaneLength="200">
-            
-            <!-- <frmk:NavigationView.ItemTemplate> -->
-            <!--     <ControlTemplate> -->
-            <!--         <frmk:NavigationView -->
-            <!--             Header="{Binding}"/> -->
-            <!--     </ControlTemplate> -->
-            <!-- </frmk:NavigationView.ItemTemplate> -->
             
             <frmk:NavigationView.MenuItems>
                 <frmk:NavigationViewItem

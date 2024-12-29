@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using WinTime.Driver;
@@ -12,12 +11,18 @@ public class MainPage : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     private readonly BuildingsCollection _buildings;
     private readonly FacultiesCollection _faculties;
-    private readonly GroupsCollection _groups;
-
+    private GroupsCollection _groups;
+    private string _selectedFaculty;
+    
+    public string SelectedFaculty
+    {
+        get => _selectedFaculty;
+        set => SetField(ref _selectedFaculty, value);
+    }
     public GroupsCollection Groups
     {
         get => _groups;
-        init => SetField(ref _groups, value, nameof(Groups));
+        set => SetField(ref _groups, value);
     }
     
     public BuildingsCollection Buildings
@@ -50,7 +55,7 @@ public class MainPage : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    public bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
     {
         if (EqualityComparer<T>.Default.Equals(field, value)) return false;
         field = value;

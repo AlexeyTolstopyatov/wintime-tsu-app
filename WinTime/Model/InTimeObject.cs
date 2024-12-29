@@ -22,7 +22,7 @@ public class InTimeObject : INotifyPropertyChanged
     public string? Id
     {
         get => _id;
-        private set => SetField(ref _id, value, nameof(Id));
+        private set => SetField(ref _id, value);
     }
     
     /// <summary>
@@ -32,7 +32,7 @@ public class InTimeObject : INotifyPropertyChanged
     public string? Name
     {
         get => _name;
-        private set => SetField(ref _name, value, nameof(Name));
+        private set => SetField(ref _name, value);
     }
 
     /// <summary>
