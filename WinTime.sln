@@ -1,16 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinTime", "WinTime\WinTime.csproj", "{9537220A-2D42-4E27-93BD-934CC9DCF7A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinTime", "WinTime\WinTime.csproj", "{13C556D2-06BF-4EEB-AB50-98BA5077BAF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinTime.Driver", "WinTime.Driver\WinTime.Driver.csproj", "{3CFCBB4D-5C00-4BD0-B841-D781CD02E355}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Any CPU|Any CPU = Any CPU|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9537220A-2D42-4E27-93BD-934CC9DCF7A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9537220A-2D42-4E27-93BD-934CC9DCF7A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9537220A-2D42-4E27-93BD-934CC9DCF7A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9537220A-2D42-4E27-93BD-934CC9DCF7A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C556D2-06BF-4EEB-AB50-98BA5077BAF5}.Any CPU|Any CPU.ActiveCfg = Any CPU|Any CPU
+		{13C556D2-06BF-4EEB-AB50-98BA5077BAF5}.Any CPU|Any CPU.Build.0 = Any CPU|Any CPU
+		{3CFCBB4D-5C00-4BD0-B841-D781CD02E355}.Any CPU|Any CPU.ActiveCfg = Any CPU|Any CPU
+		{3CFCBB4D-5C00-4BD0-B841-D781CD02E355}.Any CPU|Any CPU.Build.0 = Any CPU|Any CPU
 	EndGlobalSection
 EndGlobal

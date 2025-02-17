@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="WinTime.Views.LessonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WinTime.ViewModels"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             mc:Ignorable="d"
+             d:DesignHeight="Auto" d:DesignWidth="Auto">
+    <UserControl.DataContext>
+        <local:LessonViewViewModel/>
+    </UserControl.DataContext>
+    <ui:Card>
+        <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Title / Lesson-type-->
+                <TextBlock
+                    x:Name="Title"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    FontWeight="SemiBold">
+                    <Run Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+                    <LineBreak/>
+                </TextBlock>
+                <TextBlock
+                    x:Name="Type"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    FontSize="16"
+                    TextWrapping="Wrap"
+                    HorizontalAlignment="Right">
+                    <Run Text="{Binding Type, UpdateSourceTrigger=PropertyChanged}"/>
+                </TextBlock>
+                <!-- Information -->
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0">
+                    <Run
+                        x:Name="ProfessorRun"
+                        Text="{Binding Professor, UpdateSourceTrigger=PropertyChanged}"/>
+                    <LineBreak/>
+                    <Run
+                        x:Name="AudienceRun"
+                        Text="{Binding Audience, UpdateSourceTrigger=PropertyChanged}"/>
+                    <LineBreak/>
+                </TextBlock>
+                <!-- Groups -->
+                <ui:VirtualizingGridView
+                    x:Name="GroupsView"
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    StretchItems="True"
+                    ItemsSource="{Binding Groups, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="0,0,10,0">
+                    
+                </ui:VirtualizingGridView>
+                <!--Start/End-->
+                <TextBlock
+                    TextWrapping="NoWrap"
+                    Grid.Column="1"
+                    Grid.Row="3"
+                    FontSize="16"
+                    FontWeight="DemiBold">
+                    
+                    <Run x:Name="StartsRun"
+                         Text="{Binding Starts, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Run Text="-"/>
+                    <Run x:Name="EndsRun"
+                         Text="{Binding Ends, UpdateSourceTrigger=PropertyChanged}"/>
+                </TextBlock>
+                
+                <!--Universal Access moment-->
+                <TextBlock
+                    Margin="0,5,10,0"
+                    Grid.Column="0"
+                    Grid.Row="3">
+                    <Run Text="Пара"/>
+                    <Run x:Name="LessonNumberRun"
+                         Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"/>
+                </TextBlock>
+            </Grid>
+    </ui:Card>
+</UserControl>

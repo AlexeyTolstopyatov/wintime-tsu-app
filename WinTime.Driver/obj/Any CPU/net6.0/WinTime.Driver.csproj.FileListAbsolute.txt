@@ -1,0 +1,12 @@
+D:\Projects\cs\WinTime\WinTime.Driver\bin\Any CPU\net6.0\WinTime.Driver.deps.json
+D:\Projects\cs\WinTime\WinTime.Driver\bin\Any CPU\net6.0\WinTime.Driver.dll
+D:\Projects\cs\WinTime\WinTime.Driver\bin\Any CPU\net6.0\WinTime.Driver.pdb
+D:\Projects\cs\WinTime\WinTime.Driver\obj\Any CPU\net6.0\WinTime.Driver.csproj.AssemblyReference.cache
+D:\Projects\cs\WinTime\WinTime.Driver\obj\Any CPU\net6.0\WinTime.Driver.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\cs\WinTime\WinTime.Driver\obj\Any CPU\net6.0\WinTime.Driver.AssemblyInfoInputs.cache
+D:\Projects\cs\WinTime\WinTime.Driver\obj\Any CPU\net6.0\WinTime.Driver.AssemblyInfo.cs
+D:\Projects\cs\WinTime\WinTime.Driver\obj\Any CPU\net6.0\WinTime.Driver.csproj.CoreCompileInputs.cache
+D:\Projects\cs\WinTime\WinTime.Driver\obj\Any CPU\net6.0\WinTime.Driver.dll
+D:\Projects\cs\WinTime\WinTime.Driver\obj\Any CPU\net6.0\refint\WinTime.Driver.dll
+D:\Projects\cs\WinTime\WinTime.Driver\obj\Any CPU\net6.0\WinTime.Driver.pdb
+D:\Projects\cs\WinTime\WinTime.Driver\obj\Any CPU\net6.0\ref\WinTime.Driver.dll

@@ -1,0 +1,143 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "WinTime/1.0.0": {
+        "dependencies": {
+          "MicaWPF": "6.2.10",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.135",
+          "WPF-UI": "4.0.0",
+          "WinTime.Driver": "1.0.0"
+        },
+        "runtime": {
+          "WinTime.dll": {}
+        }
+      },
+      "MicaWPF/6.2.10": {
+        "dependencies": {
+          "MicaWPF.Core": "6.2.10",
+          "MicaWPFRuntimeComponent": "1.1.9"
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/MicaWPF.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "MicaWPF.Core/6.2.10": {
+        "runtime": {
+          "lib/net6.0-windows7.0/MicaWPF.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "MicaWPFRuntimeComponent/1.1.9": {
+        "runtime": {
+          "lib/net6.0/MicaWPF.Projection.dll": {
+            "assemblyVersion": "1.1.9.0",
+            "fileVersion": "1.1.9.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/native/MicaWPFRuntimeComponent.dll": {
+            "rid": "win",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.135": {
+        "runtime": {
+          "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.135.29210"
+          }
+        }
+      },
+      "WPF-UI/4.0.0": {
+        "dependencies": {
+          "WPF-UI.Abstractions": "4.0.0"
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/Wpf.Ui.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
+      "WPF-UI.Abstractions/4.0.0": {
+        "runtime": {
+          "lib/net6.0/Wpf.Ui.Abstractions.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
+      "WinTime.Driver/1.0.0": {
+        "runtime": {
+          "WinTime.Driver.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WinTime/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MicaWPF/6.2.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ubjNWcaNjViU1LfjvfOtgOcJeqCA85rjNU5WPfEthXyronbaNNADpKzR1Yjv6lPLZ1rItP/bnyeQrpQ/uINYAA==",
+      "path": "micawpf/6.2.10",
+      "hashPath": "micawpf.6.2.10.nupkg.sha512"
+    },
+    "MicaWPF.Core/6.2.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8TYSpKBdUDk2Q4qiKNFxhe1XYS/mVNN47WM8fyBbupvKdSO41mWKPdzUq/J/mgJiOhBG/w92S8SAOe+1CxL1cA==",
+      "path": "micawpf.core/6.2.10",
+      "hashPath": "micawpf.core.6.2.10.nupkg.sha512"
+    },
+    "MicaWPFRuntimeComponent/1.1.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-p7e8k4wy2I9AXJGsgNvtibtETsA/OFEU0jHQ04zmqSM5y9KRzJ9ESxpKlox/NO8OqBSKmlXozI/EupL9cyALcQ==",
+      "path": "micawpfruntimecomponent/1.1.9",
+      "hashPath": "micawpfruntimecomponent.1.1.9.nupkg.sha512"
+    },
+    "Microsoft.Xaml.Behaviors.Wpf/1.1.135": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-r8qBEXmQfORso2+MVHnt8PSH4761zJ0SIxgQTSEDVLU97EN2FZdG6/ZCYUPhQy+OrPKgnpYBCAs3PS6Bs7wRsg==",
+      "path": "microsoft.xaml.behaviors.wpf/1.1.135",
+      "hashPath": "microsoft.xaml.behaviors.wpf.1.1.135.nupkg.sha512"
+    },
+    "WPF-UI/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sbYXPpdZttHcmGPLfHDXDP6Q1/Dk0FubREyOj7QYTsFNwIXr2smt4o0WfUWPED586M63982DqUDhUvUSTLjpZA==",
+      "path": "wpf-ui/4.0.0",
+      "hashPath": "wpf-ui.4.0.0.nupkg.sha512"
+    },
+    "WPF-UI.Abstractions/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VXeSxHhlWq8fwapzOdhKEPg924VyVTKrs4UtvBJsDT4Rh6jdauxTGrTCyfyj2EWgN+9oP7o/2LDkQ5VGX3DcmA==",
+      "path": "wpf-ui.abstractions/4.0.0",
+      "hashPath": "wpf-ui.abstractions.4.0.0.nupkg.sha512"
+    },
+    "WinTime.Driver/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

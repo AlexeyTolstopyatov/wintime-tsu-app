@@ -4,6 +4,59 @@
     "D:\\Projects\\cs\\WinTime\\WinTime\\WinTime.csproj": {}
   },
   "projects": {
+    "D:\\Projects\\cs\\WinTime\\WinTime.Driver\\WinTime.Driver.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projects\\cs\\WinTime\\WinTime.Driver\\WinTime.Driver.csproj",
+        "projectName": "WinTime.Driver",
+        "projectPath": "D:\\Projects\\cs\\WinTime\\WinTime.Driver\\WinTime.Driver.csproj",
+        "packagesPath": "C:\\Users\\MagicBook\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\cs\\WinTime\\WinTime.Driver\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MagicBook\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.421\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "D:\\Projects\\cs\\WinTime\\WinTime\\WinTime.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -25,7 +78,11 @@
         "frameworks": {
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Projects\\cs\\WinTime\\WinTime.Driver\\WinTime.Driver.csproj": {
+                "projectPath": "D:\\Projects\\cs\\WinTime\\WinTime.Driver\\WinTime.Driver.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -42,13 +99,13 @@
               "target": "Package",
               "version": "[6.2.10, )"
             },
-            "Microsoft.Toolkit.Uwp.Notifications": {
+            "Microsoft.Xaml.Behaviors.Wpf": {
               "target": "Package",
-              "version": "[7.1.3, )"
+              "version": "[1.1.135, )"
             },
             "WPF-UI": {
               "target": "Package",
-              "version": "[4.0.0-rc.3, )"
+              "version": "[4.0.0, )"
             }
           },
           "imports": [
@@ -66,7 +123,7 @@
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             },
-            "Microsoft.WindowsDesktop.App": {
+            "Microsoft.WindowsDesktop.App.WPF": {
               "privateAssets": "none"
             }
           },

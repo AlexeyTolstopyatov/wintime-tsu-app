@@ -1,0 +1,77 @@
+﻿<mw:MicaWindow x:Class="WinTime.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WinTime.ViewModels"
+        xmlns:lw="clr-namespace:WinTime.Views"
+        xmlns:as="clr-namespace:WinTime.Input"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:mw="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"
+        mc:Ignorable="d"
+        Title="WinTime (TSU InTime Windows client)" 
+        Height="600" Width="900">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--Menu -> Schedule by group-->
+        <ui:Card
+            Grid.Column="0"
+            Margin="20"
+            VerticalAlignment="Top">
+            <ui:Card.Content>
+                <StackPanel>
+                    <TextBlock
+                        TextWrapping="Wrap">
+                        <Run Text="Help me to find your timetable - select faculty and group, you registered in Tomsk State University"/>
+                        <LineBreak/>
+                    </TextBlock>
+                    <ui:AutoSuggestBox
+                        PlaceholderText="Select Faculty [Enter]"
+                        OriginalItemsSource="{Binding Faculties, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding FacultySelectionCommand, UpdateSourceTrigger=PropertyChanged}"
+                        as:AutoSuggestBoxBehavior.QuerySubmittedCommand="{Binding FacultySelectionCommand}"
+                        DisplayMemberPath="Name">
+                    </ui:AutoSuggestBox>
+                    <ui:AutoSuggestBox
+                        PlaceholderText="Select Group [Enter]"
+                        Margin="0,5,0,0"
+                        IsEnabled="{Binding AllowGroupBox, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding Groups, UpdateSourceTrigger=PropertyChanged}"
+                        OriginalItemsSource="{Binding Groups, UpdateSourceTrigger=PropertyChanged}"
+                        DisplayMemberPath="Name"
+                        as:AutoSuggestBoxBehavior.QuerySubmittedCommand="{Binding GroupSelectionCommand}">
+                    </ui:AutoSuggestBox>
+                    <TextBlock
+                        Margin="0,10,0,0">
+                        <Run Text="Selected group: "></Run>
+                        <Run Text="{Binding SelectedGroup, UpdateSourceTrigger=PropertyChanged}"/>
+                        <LineBreak/>
+                    </TextBlock>
+                </StackPanel>
+            </ui:Card.Content>
+        </ui:Card>
+        
+        <ItemsControl
+            Margin="0,20,30,20"
+            Grid.Column="1"
+            ItemsSource="{Binding ScheduleByGroup}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <lw:LessonView LessonSource="{Binding Lessons}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
+    </Grid>
+</mw:MicaWindow>

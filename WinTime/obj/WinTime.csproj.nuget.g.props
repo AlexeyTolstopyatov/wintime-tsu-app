@@ -13,6 +13,7 @@
     <SourceRoot Include="C:\Users\MagicBook\.nuget\packages\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgWPF-UI Condition=" '$(PkgWPF-UI)' == '' ">C:\Users\MagicBook\.nuget\packages\wpf-ui\4.0.0-rc.3</PkgWPF-UI>
+    <PkgWPF-UI Condition=" '$(PkgWPF-UI)' == '' ">C:\Users\MagicBook\.nuget\packages\wpf-ui\4.0.0</PkgWPF-UI>
+    <PkgMicrosoft_Xaml_Behaviors_Wpf Condition=" '$(PkgMicrosoft_Xaml_Behaviors_Wpf)' == '' ">C:\Users\MagicBook\.nuget\packages\microsoft.xaml.behaviors.wpf\1.1.135</PkgMicrosoft_Xaml_Behaviors_Wpf>
   </PropertyGroup>
 </Project>
