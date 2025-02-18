@@ -2,8 +2,8 @@
 
 namespace WinTime.Driver.Models.OldWeb;
 
-public struct Audience
+public class Audience
 {
-    [JsonPropertyName("id")]   public string Id;
-    [JsonPropertyName("name")] public string Name;
+    [JsonPropertyName("id")] public string Id { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; }
 }

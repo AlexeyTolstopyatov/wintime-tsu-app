@@ -31,5 +31,3 @@ D:\Projects\cs\WinTime\WinTime\bin\Any CPU\net6.0-windows\Microsoft.Xaml.Behavio
 D:\Projects\cs\WinTime\WinTime\obj\Any CPU\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\Projects\cs\WinTime\WinTime\bin\Any CPU\net6.0-windows\Wpf.Ui.dll
 D:\Projects\cs\WinTime\WinTime\bin\Any CPU\net6.0-windows\Wpf.Ui.Abstractions.dll
-D:\Projects\cs\WinTime\WinTime\obj\Any CPU\net6.0-windows\Views\LessonView.g.cs
-D:\Projects\cs\WinTime\WinTime\obj\Any CPU\net6.0-windows\Views\LessonView.baml

@@ -50,8 +50,7 @@ public class NotAuthorizedProvider : IMessageWriter
         var response = 
             request.Result.Content.ReadFromJsonAsync<TStruct>();
             
-        if (response.Result is not null)
-            faculties = response.Result;
+        faculties = response.Result!;
         
         return this;
     }
@@ -73,8 +72,7 @@ public class NotAuthorizedProvider : IMessageWriter
         var response = 
             request.Result.Content.ReadFromJsonAsync<TStruct>();
             
-        if (response.Result is not null)
-            buildings = response.Result;
+        buildings = response.Result!;
         
         return this;
     }
@@ -119,9 +117,9 @@ public class NotAuthorizedProvider : IMessageWriter
 
         var response = 
             request.Result.Content.ReadFromJsonAsync<TStruct>();
-            
-        if (response.Result is not null)
-            groups = response.Result;
+        
+        // groups already not null. Referenced types are not null here.
+        groups = response.Result!;
         
         return this;
     }
@@ -142,9 +140,8 @@ public class NotAuthorizedProvider : IMessageWriter
 
         var response = 
             request.Result.Content.ReadFromJsonAsync<TSchedule>();
-            
-        if (response.Result is not null)
-            schedule = response.Result;
+        
+        schedule = response.Result!;
         
         return this;
     }

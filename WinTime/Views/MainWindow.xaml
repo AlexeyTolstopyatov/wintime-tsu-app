@@ -53,25 +53,119 @@
                         <Run Text="{Binding SelectedGroup, UpdateSourceTrigger=PropertyChanged}"/>
                         <LineBreak/>
                     </TextBlock>
+                    <!--Test #18-->
+                    <Button
+                        Command="{Binding TestScheduleCommand, UpdateSourceTrigger=PropertyChanged}"
+                        Content="Test Schedule JSON">
+                        
+                    </Button>
+
                 </StackPanel>
             </ui:Card.Content>
         </ui:Card>
-        
+        <!-- 
+           Move it to normal UserControl. 
+           For 1st try - I GIVE UP how to bind UserControl with data
+           All what I've trying was just empty card, but ViewModel
+           not-null.
+           
+           I'll move it constructor to one LessonCard 
+           
+           Try to minimize cards - make CardExpanders
+        -->
         <ItemsControl
-            Margin="0,20,30,20"
             Grid.Column="1"
+            Margin="0,20,30,20"
             ItemsSource="{Binding ScheduleByGroup}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <lw:LessonView LessonSource="{Binding Lessons}" />
+                    <!--Day[] root-->
+                    <ui:ListView>
+                        <TextBlock Text="{Binding Date, StringFormat='{}{0:dd.MM.yyyy}'}" FontWeight="Bold" Margin="5"/>
+                        <ItemsControl ItemsSource="{Binding Lessons}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ui:Card
+                                        Margin="2.5"
+                                        MaxHeight="400">
+                                        <ui:Card.Content>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <!--Title / Lesson-type-->
+                                                <TextBlock
+                                                    FontSize="16"
+                                                    TextWrapping="Wrap"
+                                                    FontWeight="SemiBold">
+                                                    <Run Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <LineBreak/>
+                                                </TextBlock>
+                                                <TextBlock
+                                                    Grid.Column="1"
+                                                    Grid.Row="0"
+                                                    FontSize="16"
+                                                    TextWrapping="Wrap"
+                                                    HorizontalAlignment="Right">
+                                                    <Run Text="{Binding LessonType, UpdateSourceTrigger=PropertyChanged}"/>
+                                                </TextBlock>
+                                                <!-- Information -->
+                                                <TextBlock
+                                                    Grid.Row="1"
+                                                    Grid.Column="0">
+                                                    <Run
+                                                        Text="{Binding Professor, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <LineBreak/>
+                                                    <Run
+                                                        Text="{Binding Audience, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <LineBreak/>
+                                                </TextBlock>
+                                                <!-- Groups -->
+                                                <ui:VirtualizingGridView
+                                                    Grid.Column="0"
+                                                    Grid.Row="2"
+                                                    StretchItems="True"
+                                                    ItemsSource="{Binding Groups, UpdateSourceTrigger=PropertyChanged}"
+                                                    Margin="0,0,10,0">
+                                                    
+                                                </ui:VirtualizingGridView>
+                                                <!--Start/End-->
+                                                <TextBlock
+                                                    TextWrapping="NoWrap"
+                                                    Grid.Column="1"
+                                                    Grid.Row="3"
+                                                    FontSize="16"
+                                                    FontWeight="DemiBold">
+                                                    
+                                                    <Run Text="{Binding Starts, UpdateSourceTrigger=PropertyChanged}"/>
+                                                    <Run Text="-"/>
+                                                    <Run Text="{Binding Ends, UpdateSourceTrigger=PropertyChanged}"/>
+                                                </TextBlock>
+                                                
+                                                <!--Universal Access moment-->
+                                                <TextBlock
+                                                    Margin="0,5,10,0"
+                                                    Grid.Column="0"
+                                                    Grid.Row="3">
+                                                    <Run Text="Пара"/>
+                                                    <Run Text="{Binding LessonNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                                                </TextBlock>
+                                            </Grid>
+                                        </ui:Card.Content>
+                                    </ui:Card>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ui:ListView>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        
     </Grid>
 </mw:MicaWindow>

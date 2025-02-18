@@ -1,17 +1,20 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Diagnostics;
+using System.Text.Json.Serialization;
 
 namespace WinTime.Driver.Models.OldWeb;
 
 public class Day
 {
-    public Day(string date, Lesson[] lessons)
-    {
-        this.Date = date;
-        this.Lessons = lessons;
-    }
+    /// <summary>
+    /// Data of day in timetable
+    /// </summary>
+    [JsonPropertyName("date")] 
+    public string Date { get; set; } = string.Empty;
     
-    [JsonPropertyName("date")]
-    public string Date { get; set; }
+    /// <summary>
+    /// Represents always initialized array segment
+    /// of Lessons
+    /// </summary>
     [JsonPropertyName("lessons")]
-    public Lesson[] Lessons { get; set; }
+    public Lesson[] Lessons { get; set; } = Array.Empty<Lesson>();
 }

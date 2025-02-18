@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Security.Policy;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Accessibility;
 using WinTime.Driver.Interfaces;
 using WinTime.Driver.Models.OldWeb;
 using WinTime.Driver.Providers;
@@ -26,14 +26,16 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
     private bool _allowGroupBox;
     private Day[] _scheduleByGroup;
     private Group _selectedGroup;
+    private ICommand _testScheduleCommand;
     
     public MainWindowViewModel()
     {
         _allowGroupBox = false;
         _facultySelectionCommand = new RelayCommand<string>(FacultySelected!);
         _groupSelectionCommand = new RelayCommand<string>(GroupSelected!);
+        _testScheduleCommand = new RelayCommand<object>(TestSchedule!);
         _ = InitializeCulture();
-        _ = InitializeModel();
+        //_ = InitializeModel();
     }
 
     /// <summary>
@@ -61,8 +63,6 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
     /// <param name="name"></param>
     private void FacultySelected(string name)
     {
-        Console.Write("FacultySelected: ");
-        // get by key [name]
         string id = Faculties
             .Where(x => x.Name == name)
             .Select(x =>
@@ -81,8 +81,6 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
 
         if (groups.Count > 0)
             AllowGroupBox = true;
-        
-        Console.WriteLine($"groups={groups.Count}");
     }
 
     /// <summary>
@@ -91,12 +89,9 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
     /// <param name="number"></param>
     private void GroupSelected(string number)
     {
-        // remember: number takes from XAML bindings
-        // (QuerySubmitted.QueryText{ get; set; })
         SelectedGroup = number;
         Console.Write("GroupSelected: ");
         
-        // get by key [name]
         string id = Groups
             .Where(x => x.Name == number)
             .Select(x =>
@@ -106,7 +101,6 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
             })
             .First();
         
-        // name takes from View ware.
         List<Day> days = new();
         IMessageWriter provider = 
             new NotAuthorizedProvider(UrlApplication.Old, UrlApplicationVersion.Version1)
@@ -118,15 +112,40 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
             AllowGroupBox = true;
         
         Console.WriteLine($"days={days.Count}");
-        foreach (var day in ScheduleByGroup)
-        foreach (var lesson in day.Lessons)
+        foreach (Day day in ScheduleByGroup)
+        foreach (Lesson lesson in day.Lessons)
         {
-            Console.WriteLine($"{day.Date}\t({lesson.Type}){lesson.Title}");
+            Console.WriteLine($"{day.Date}\t({lesson.LessonType}){lesson.Title}");
         }
     }
+
+    /// <summary>
+    /// Test #18
+    /// Deserialization & Viewing given not-null schedule JSON 
+    /// </summary>
+    private void TestSchedule(object unused)
+    {
+        // C:\schedule.json
+        string filePath = @"C:\Users\MagicBook\Desktop\schedule.json";
+
+        string json = File.ReadAllText(filePath);
+        
+        List<Day>? daysList = new();
+        daysList = JsonSerializer.Deserialize<List<Day>>(json);
+
+        ScheduleByGroup = daysList!.ToArray();
+    }
+    
     #endregion
     
     #region ViewModelProperties
+
+    public ICommand TestScheduleCommand
+    {
+        get => _testScheduleCommand;
+        set => SetField(ref _testScheduleCommand, value);
+    }
+    
     public bool AllowGroupBox
     {
         get => _allowGroupBox;

@@ -25,15 +25,15 @@ public class LessonViewViewModel : NotifyPropertyChanged
         _title = "Нет пары";
         _ends = new DateTime().AddSeconds(lesson.Ends).ToShortTimeString();
         _starts = new DateTime().AddSeconds(lesson.Starts).ToShortTimeString();
-        _number = lesson.Number.ToString();
+        _number = lesson.LessonNumber.ToString();
 
-        if (lesson.MessageType == "EMPTY") return; // force exit when no lesson.
+        if (lesson.Type == "EMPTY") return; // force exit when no lesson.
         
         _audience = lesson.Audience.Name;
         _professor = lesson.Professor.FullName;
         _groups = lesson.Groups.Select(x => x.Name).ToArray();
         _title = lesson.Title;
-        _type = lesson.Type;
+        _type = lesson.LessonType;
     }
     
     #region ViewModel Properties

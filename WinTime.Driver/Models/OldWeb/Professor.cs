@@ -2,8 +2,10 @@
 
 namespace WinTime.Driver.Models.OldWeb;
 
-public struct Professor
+public class Professor
 {
-    [JsonPropertyName("id")] public string Id;
-    [JsonPropertyName("fullName")] public string FullName;
+    [JsonPropertyName("id")] 
+    public string Id { get; set; }
+    [JsonPropertyName("fullName")] 
+    public string FullName { get; set; }
 }
