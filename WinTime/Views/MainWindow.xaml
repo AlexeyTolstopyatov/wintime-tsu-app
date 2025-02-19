@@ -28,18 +28,19 @@
                 <StackPanel>
                     <TextBlock
                         TextWrapping="Wrap">
-                        <Run Text="Help me to find your timetable - select faculty and group, you registered in Tomsk State University"/>
+                        <Run Text="Чтобы отобразить расписание Томского Государственного университета, укажите факультет и группу."/>
                         <LineBreak/>
                     </TextBlock>
                     <ui:AutoSuggestBox
-                        PlaceholderText="Select Faculty [Enter]"
+                        IsEnabled="{Binding AllowFaculties}"
+                        PlaceholderText="Выберите факультет [Enter]"
                         OriginalItemsSource="{Binding Faculties, UpdateSourceTrigger=PropertyChanged}"
                         ItemsSource="{Binding FacultySelectionCommand, UpdateSourceTrigger=PropertyChanged}"
                         as:AutoSuggestBoxBehavior.QuerySubmittedCommand="{Binding FacultySelectionCommand}"
                         DisplayMemberPath="Name">
                     </ui:AutoSuggestBox>
                     <ui:AutoSuggestBox
-                        PlaceholderText="Select Group [Enter]"
+                        PlaceholderText="Выберите группу [Enter]"
                         Margin="0,5,0,0"
                         IsEnabled="{Binding AllowGroupBox, UpdateSourceTrigger=PropertyChanged}"
                         ItemsSource="{Binding Groups, UpdateSourceTrigger=PropertyChanged}"
@@ -49,17 +50,10 @@
                     </ui:AutoSuggestBox>
                     <TextBlock
                         Margin="0,10,0,0">
-                        <Run Text="Selected group: "></Run>
+                        <Run Text="Выбранная группа: "></Run>
                         <Run Text="{Binding SelectedGroup, UpdateSourceTrigger=PropertyChanged}"/>
                         <LineBreak/>
                     </TextBlock>
-                    <!--Test #18-->
-                    <Button
-                        Command="{Binding TestScheduleCommand, UpdateSourceTrigger=PropertyChanged}"
-                        Content="Test Schedule JSON">
-                        
-                    </Button>
-
                 </StackPanel>
             </ui:Card.Content>
         </ui:Card>
@@ -73,22 +67,31 @@
            
            Try to minimize cards - make CardExpanders
         -->
-        <ItemsControl
+        <ui:VirtualizingItemsControl
             Grid.Column="1"
             Margin="0,20,30,20"
             ItemsSource="{Binding ScheduleByGroup}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <!--Day[] root-->
-                    <ui:ListView>
-                        <TextBlock Text="{Binding Date, StringFormat='{}{0:dd.MM.yyyy}'}" FontWeight="Bold" Margin="5"/>
-                        <ItemsControl ItemsSource="{Binding Lessons}">
+                    <WrapPanel 
+                        Orientation="Vertical"> 
+                        <TextBlock 
+                            Text="{Binding Date, StringFormat='{}{0:dd.MM.yyyy}'}" 
+                            FontWeight="Bold"
+                            FontSize="21"
+                            Margin="5"/>
+                        <ItemsControl 
+                            ItemsSource="{Binding Lessons}"
+                            Margin="0,0,0,10">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <ui:Card
+                                    <ui:CardExpander
                                         Margin="2.5"
-                                        MaxHeight="400">
-                                        <ui:Card.Content>
+                                        MinWidth="400"
+                                        MaxWidth="400"
+                                        Header="{Binding Title}">
+                                        <ui:CardExpander.Content>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
@@ -119,7 +122,8 @@
                                                 <!-- Information -->
                                                 <TextBlock
                                                     Grid.Row="1"
-                                                    Grid.Column="0">
+                                                    Grid.Column="0"
+                                                    TextWrapping="WrapWithOverflow">
                                                     <Run
                                                         Text="{Binding Professor, UpdateSourceTrigger=PropertyChanged}"/>
                                                     <LineBreak/>
@@ -158,14 +162,14 @@
                                                     <Run Text="{Binding LessonNumber, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </TextBlock>
                                             </Grid>
-                                        </ui:Card.Content>
-                                    </ui:Card>
+                                        </ui:CardExpander.Content>
+                                    </ui:CardExpander>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                    </ui:ListView>
+                    </WrapPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </ui:VirtualizingItemsControl>
     </Grid>
 </mw:MicaWindow>

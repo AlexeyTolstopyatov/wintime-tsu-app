@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WinTime.Driver.Interfaces;
@@ -10,7 +8,6 @@ using WinTime.Driver.Models.OldWeb;
 using WinTime.Driver.Providers;
 using WinTime.Driver.Readers;
 using WinTime.Models;
-using Wpf.Ui.Controls;
 using Wpf.Ui.Input;
 
 namespace WinTime.ViewModels;
@@ -24,18 +21,18 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
     private Faculty _selectedFacultyString;
     private string _selectedGroupString;
     private bool _allowGroupBox;
-    private Day[] _scheduleByGroup;
+    private bool _allowFaculties;
+    private ScheduleModel[] _scheduleByGroup;
     private Group _selectedGroup;
-    private ICommand _testScheduleCommand;
     
     public MainWindowViewModel()
     {
         _allowGroupBox = false;
+        _allowFaculties = false;
         _facultySelectionCommand = new RelayCommand<string>(FacultySelected!);
         _groupSelectionCommand = new RelayCommand<string>(GroupSelected!);
-        _testScheduleCommand = new RelayCommand<object>(TestSchedule!);
         _ = InitializeCulture();
-        //_ = InitializeModel();
+        _ = InitializeModel();
     }
 
     /// <summary>
@@ -44,115 +41,59 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
     /// <returns></returns>
     private Task InitializeModel()
     {
-        Console.Write("InitializeModel: ");
-        NotAuthorizedProvider provider = new(UrlApplication.Old, UrlApplicationVersion.Version1);
-        List<Faculty> faculties = new();
-        
-        provider.FillFaculties(ref faculties);
-        Faculties = faculties.ToArray();
-        
-        Console.WriteLine($"faculties={faculties.Count}");
+        try
+        {
+            NotAuthorizedProvider provider = 
+                new(UrlApplication.Old, UrlApplicationVersion.Version1);
+            List<Faculty> faculties = new();
+
+            provider.FillFaculties(ref faculties);
+            Faculties = faculties.ToArray();
+            AllowFaculties = true;
+        }
+        catch (Exception e)
+        {
+            SelectedGroup = "Нет соединения";
+        }
+
         return Task.CompletedTask;
     }
     
     #region ViewModelCommands
+    
     /// <summary>
-    /// Fills groups by Faculty ID
-    /// Or gets Provider instance and calls it for fill groups.
+    /// Calls Task instance for TSU faculties
+    /// in another thread.
     /// </summary>
     /// <param name="name"></param>
     private void FacultySelected(string name)
     {
-        string id = Faculties
-            .Where(x => x.Name == name)
-            .Select(x =>
-            {
-                _selectedFacultyString = x;
-                return x.Id;
-            })
-            .First();
-        
-        // name takes from View ware.
-        List<Group> groups = new();
-        IMessageWriter provider = 
-            new NotAuthorizedProvider(UrlApplication.Old, UrlApplicationVersion.Version1)
-            .FillGroupsByFId(ref groups, id);
-        Groups = groups.ToArray();
-
-        if (groups.Count > 0)
-            AllowGroupBox = true;
+        Task.Run(() => FillFacultiesAsync(name));
     }
 
     /// <summary>
-    /// Makes timetable
+    /// Calls Task instance for groups faculties
+    /// in another thread.
     /// </summary>
     /// <param name="number"></param>
     private void GroupSelected(string number)
     {
-        SelectedGroup = number;
-        Console.Write("GroupSelected: ");
-        
-        string id = Groups
-            .Where(x => x.Name == number)
-            .Select(x =>
-            {
-                _selectedGroup = x;
-                return x.Id;
-            })
-            .First();
-        
-        List<Day> days = new();
-        IMessageWriter provider = 
-            new NotAuthorizedProvider(UrlApplication.Old, UrlApplicationVersion.Version1)
-                .FillScheduleByGId(ref days, id);
-        
-        ScheduleByGroup = days.ToArray();
-
-        if (days.Count > 0)
-            AllowGroupBox = true;
-        
-        Console.WriteLine($"days={days.Count}");
-        foreach (Day day in ScheduleByGroup)
-        foreach (Lesson lesson in day.Lessons)
-        {
-            Console.WriteLine($"{day.Date}\t({lesson.LessonType}){lesson.Title}");
-        }
+        Task.Run(() => FillGroupsAsync(number));
     }
-
-    /// <summary>
-    /// Test #18
-    /// Deserialization & Viewing given not-null schedule JSON 
-    /// </summary>
-    private void TestSchedule(object unused)
-    {
-        // C:\schedule.json
-        string filePath = @"C:\Users\MagicBook\Desktop\schedule.json";
-
-        string json = File.ReadAllText(filePath);
-        
-        List<Day>? daysList = new();
-        daysList = JsonSerializer.Deserialize<List<Day>>(json);
-
-        ScheduleByGroup = daysList!.ToArray();
-    }
-    
     #endregion
     
     #region ViewModelProperties
-
-    public ICommand TestScheduleCommand
-    {
-        get => _testScheduleCommand;
-        set => SetField(ref _testScheduleCommand, value);
-    }
-    
     public bool AllowGroupBox
     {
         get => _allowGroupBox;
         set => SetField(ref _allowGroupBox, value);
     }
-
-    public Day[] ScheduleByGroup
+    public bool AllowFaculties
+    {
+        get => _allowFaculties;
+        set => SetField(ref _allowFaculties, value);
+    }
+    public ScheduleModel[] ScheduleByGroup
     {
         get => _scheduleByGroup;
         set => SetField(ref _scheduleByGroup, value);
@@ -185,6 +126,68 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
         get => _groups;
         set => SetField(ref _groups, value);
     }
+    #endregion
 
+    #region AsyncActions
+    /// <summary>
+    /// Fills Faculties structures array
+    /// Or gets Provider instance and calls it for fill faculties.
+    /// </summary>
+    /// <param name="name"></param>
+    private Task FillFacultiesAsync(string name)
+    {
+        string id = Faculties
+            .Where(x => x.Name == name)
+            .Select(x =>
+            {
+                _selectedFacultyString = x;
+                return x.Id;
+            })
+            .First();
+        
+        // name takes from View ware.
+        List<Group> groups = new();
+        IMessageWriter provider = 
+            new NotAuthorizedProvider(UrlApplication.Old, UrlApplicationVersion.Version1)
+                .FillGroupsByFId(ref groups, id);
+        Groups = groups.ToArray();
+
+        if (groups.Count > 0)
+            AllowGroupBox = true;
+        return Task.CompletedTask;
+    }
+    /// <summary>
+    /// Fills groups by Faculty ID
+    /// Or gets Provider instance and calls it for fill groups.
+    /// </summary>
+    /// <param name="number"></param>
+    private Task FillGroupsAsync(string number)
+    {
+        SelectedGroup = number;
+        string id = Groups
+            .Where(x => x.Name == number)
+            .Select(x =>
+            {
+                _selectedGroup = x;
+                return x.Id;
+            })
+            .First();
+        
+        List<Day> days = new();
+        IMessageWriter provider = 
+            new NotAuthorizedProvider(UrlApplication.Old, UrlApplicationVersion.Version1)
+                .FillScheduleByGId(ref days, id);
+
+        var normalized =
+            from i in days.ToArray()
+            select new ScheduleModel(i.Date, i.Lessons);
+
+        // sort not-empty cards
+        ScheduleByGroup = normalized.ToArray();
+        
+        if (days?.Count > 0) AllowGroupBox = true;
+        
+        return Task.CompletedTask;
+    }
     #endregion
 }
