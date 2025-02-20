@@ -23,3 +23,17 @@ used by you platform. (I know only)
 
 WinTime uses `Web` API by default.
 
+### Screenshots
+At the Feb 2025 moment, Windows client looks like that, 
+and it will be improve next time.
+
+![image](https://github.com/user-attachments/assets/dbb64529-84c6-4bfa-a082-1eb6e6a27375)
+
+Maximized Window 
+
+![image](https://github.com/user-attachments/assets/117727a4-687d-475f-80eb-cee2834df1b3)
+
+### What's next?
+In the future I want to bind it with `TSU.Account` 
+services and show little more about 
+credit-book and other data, using TSU InTime public API.
