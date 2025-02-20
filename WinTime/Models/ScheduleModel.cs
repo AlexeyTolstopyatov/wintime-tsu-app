@@ -11,9 +11,12 @@ public class ScheduleModel
         Date = DateOnly.Parse(date)
             .DayOfWeek
             .ToString();
+        
         var iterates = 
-            from i in lessons 
+            from i in lessons
+            where i.Type != "EMPTY"
             select new LessonModel(i);
+        
         Lessons = iterates.ToArray();
     }
     

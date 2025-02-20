@@ -6,6 +6,11 @@
         <Nullable>enable</Nullable>
         <Configurations>Debug;Release;Any CPU</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <Version>1.2.3</Version>
+        <Title>InTime for Windows Client library</Title>
+        <Authors>AlexeyTolstopyatov</Authors>
+        <Description> Provides API of network providers and other internet features for TSU InTime server connection.</Description>
+        <Copyright>AlexeyTolstopyatov</Copyright>
     </PropertyGroup>
 
     <ItemGroup>

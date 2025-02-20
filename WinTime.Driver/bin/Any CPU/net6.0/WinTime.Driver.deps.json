@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "WinTime.Driver/1.0.0": {
+      "WinTime.Driver/1.2.3": {
         "runtime": {
           "WinTime.Driver.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "WinTime.Driver/1.0.0": {
+    "WinTime.Driver/1.2.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

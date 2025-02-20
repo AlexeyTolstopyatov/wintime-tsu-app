@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WinTime.Config;
 using WinTime.Driver.Interfaces;
 using WinTime.Driver.Models.OldWeb;
 using WinTime.Driver.Providers;
@@ -14,6 +15,7 @@ namespace WinTime.ViewModels;
 
 public partial class MainWindowViewModel : NotifyPropertyChanged
 {
+    private WinTimeConfigModel _configModel;
     private ICommand _facultySelectionCommand;
     private ICommand _groupSelectionCommand;
     private Faculty[] _faculties;
@@ -29,12 +31,11 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
     {
         _allowGroupBox = false;
         _allowFaculties = false;
+        _configModel = new WinTimeConfigModel(); // master makes work itself
         _facultySelectionCommand = new RelayCommand<string>(FacultySelected!);
         _groupSelectionCommand = new RelayCommand<string>(GroupSelected!);
-        _ = InitializeCulture();
         _ = InitializeModel();
     }
-
     /// <summary>
     /// Creates basics of MainWindowViewModel
     /// </summary>
@@ -70,7 +71,6 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
     {
         Task.Run(() => FillFacultiesAsync(name));
     }
-
     /// <summary>
     /// Calls Task instance for groups faculties
     /// in another thread.
@@ -148,7 +148,7 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
         // name takes from View ware.
         List<Group> groups = new();
         IMessageWriter provider = 
-            new NotAuthorizedProvider(UrlApplication.Old, UrlApplicationVersion.Version1)
+            new NotAuthorizedProvider(_configModel.Application, _configModel.Version)
                 .FillGroupsByFId(ref groups, id);
         Groups = groups.ToArray();
 
@@ -175,13 +175,21 @@ public partial class MainWindowViewModel : NotifyPropertyChanged
         
         List<Day> days = new();
         IMessageWriter provider = 
-            new NotAuthorizedProvider(UrlApplication.Old, UrlApplicationVersion.Version1)
+            new NotAuthorizedProvider(_configModel.Application, _configModel.Version)
                 .FillScheduleByGId(ref days, id);
 
+        var notEmptyDays =
+            from day in days
+            where day.Lessons.Any(x => x.Type != "EMPTY")
+            select new Day
+            {
+                Date = day.Date, Lessons = day.Lessons
+            };
+        
         var normalized =
-            from i in days.ToArray()
+            from i in notEmptyDays
             select new ScheduleModel(i.Date, i.Lessons);
-
+        
         // sort not-empty cards
         ScheduleByGroup = normalized.ToArray();
         

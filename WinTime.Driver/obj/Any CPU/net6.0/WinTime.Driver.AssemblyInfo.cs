@@ -10,13 +10,16 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("WinTime.Driver")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("AlexeyTolstopyatov")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Any CPU")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("AlexeyTolstopyatov")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute(" Provides API of network providers and other internet features for TSU InTime ser" +
+    "ver connection.")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.2.3.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.2.3")]
 [assembly: System.Reflection.AssemblyProductAttribute("WinTime.Driver")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WinTime.Driver")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.2.3.0")]
 
 // Создано классом WriteCodeFragment MSBuild.
 

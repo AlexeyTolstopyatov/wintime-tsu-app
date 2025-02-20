@@ -7,6 +7,13 @@
         <UseWPF>true</UseWPF>
         <Configurations>Debug;Release;Any CPU</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <Version>1.2.3</Version>
+        <AssemblyVersion>1.2.3.4</AssemblyVersion>
+        <FileVersion>1.2.3.4</FileVersion>
+        <Title>ImTime for Windows</Title>
+        <Authors>AlexeyTolstopyatov</Authors>
+        <Description>Simple TSU InTime desktop client for Windows</Description>
+        <Copyright>AlexeyTolstopyatov</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
